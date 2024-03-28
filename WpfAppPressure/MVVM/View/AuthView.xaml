@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="WpfAppPressure.MVVM.View.AuthView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfAppPressure.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="400" Background="White">
+    <StackPanel>
+
+
+        <TextBlock HorizontalAlignment="Center"
+                   Margin="0,50,0,50"
+                   FontSize="25"
+                   FontStyle="Normal"
+                   FontWeight="Bold">
+            Авторизация
+        </TextBlock>
+
+
+        <TextBox Width="240" Height="40"
+                 Margin="0,20,0,20"
+                BorderThickness="0,0,0,1.5"
+                 BorderBrush="Gray"
+                 VerticalContentAlignment="Center"
+                 x:Name="email"
+                 TextChanged="ChangedEmail">
+
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrushEmail" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Email" Foreground="Gray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+
+                    <Setter Property="Background" Value="{StaticResource CueBannerBrushEmail}" />
+
+                </Style>
+            </TextBox.Style>
+
+            
+
+
+        </TextBox>
+
+        <PasswordBox Width="240" Height="40"
+                 Margin="0,20,0,50"
+                 BorderThickness="0,0,0,1.5"
+                 BorderBrush="Gray"
+                 VerticalContentAlignment="Center"
+                 x:Name="password1"
+                  PasswordChanged="ChangedPassword">
+            
+            <PasswordBox.Style>
+                <Style TargetType="PasswordBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrushPassword" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Password" Foreground="Gray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    
+                   <Setter Property="Background" Value="{StaticResource CueBannerBrushPassword}" />
+                </Style>
+            </PasswordBox.Style>
+
+        </PasswordBox>
+            
+        
+
+
+        <Button  Width="200" Height="40" 
+                    BorderThickness="0"
+                    Foreground="White"
+                    Name="AuthButton"
+                 HorizontalContentAlignment="Center"
+                 Click="AuthVerifyClick">
+            
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                   
+                </Style>
+                </Button.Resources>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#0077ff"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#5533ff"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+
+
+            <TextBlock FontSize="16">
+                Авторизоваться
+            </TextBlock>
+        </Button>
+        <TextBlock HorizontalAlignment="Center"
+                   Margin="0,30,0,10"
+                   FontWeight="bold"
+                   FontSize="10">
+            ИЛИ
+        </TextBlock>
+
+        <TextBlock HorizontalAlignment="Center"
+                   FontWeight="Bold"
+                   MouseLeftButtonDown="RegWindowOpen"
+                   FontSize="10">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+                </Trigger>
+            </Style.Triggers>
+         </Style>
+            </TextBlock.Style>      
+            ЗАРЕГИСТРИРОВАТЬСЯ
+        </TextBlock>
+        
+    </StackPanel>
+</UserControl>

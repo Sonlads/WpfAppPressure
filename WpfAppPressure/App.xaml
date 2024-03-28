@@ -1,0 +1,54 @@
+﻿<Application x:Class="WpfAppPressure.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfAppPressure"
+             xmlns:viewModel="clr-namespace:WpfAppPressure.MVVM.ViewModel"
+             xmlns:view="clr-namespace:WpfAppPressure.MVVM.View"
+             StartupUri="AuthWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme\MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme\BorderHomeTheme.xaml"/>
+                <ResourceDictionary Source="Theme\CheckBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}" >
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:PressureViewModel}" >
+                <view:PressureView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:MonitoringViewModel}" >
+                <view:MonitoringView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ProfilViewModel}" >
+                <view:ProfilView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AuthViewModel}" >
+                <view:AuthView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RegViewModel}" >
+                <view:RegView/>
+            </DataTemplate>
+
+           
+
+           
+
+
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+    
+    
+</Application>

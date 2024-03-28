@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="{x:Type Border}"
+           x:Key="BorderHomeTheme">
+        
+
+        <Setter Property="Border.Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                    <GradientStop Color="#5b93ff" Offset="0.0"/>
+                    <GradientStop Color="#0055ff" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true">
+                <Setter Property="Border.Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#5b00ff" Offset="0.0"/>
+                            <GradientStop Color="#0000ff" Offset="1"/>
+
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+
+       
+    </Style>
+
+    <Style TargetType="{x:Type StackPanel}"
+           x:Key="StackPanelShadow">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="Black"
+                   BlurRadius="15"
+                   Opacity="0.5"
+                   ShadowDepth="4"
+                   Direction="320">
+
+                </DropShadowEffect>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+
+</ResourceDictionary>
