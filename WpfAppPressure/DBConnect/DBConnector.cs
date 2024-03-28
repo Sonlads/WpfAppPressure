@@ -14,15 +14,15 @@ namespace WpfAppPressure.DBConnect
     public class DBConnector
     {
         private string query = null;
-        private string MySQLConnect = "datasource=127.0.0.1;port=3306;username=sonlads;password=SD33bn55_;database=pressure;";
-        private MySqlConnection databaseConnection = null;
+        static private string MySQLConnect = "datasource=127.0.0.1;port=3306;username=sonlads;password=SD33bn55_;database=pressure;";
+        private MySqlConnection databaseConnection = new MySqlConnection(MySQLConnect);
         private MySqlDataReader reader = null;
         private MySqlCommand command = null;
 
         public DBConnector() 
         {
-            DBConnectors();
-            Console.WriteLine("Обращение");
+           // DBConnectors();
+            Console.WriteLine("/////////Обращение в класс взаимоджействия с БД //////////");
         }
 
         static string ComputeSHA256Hash(string input)
@@ -41,25 +41,25 @@ namespace WpfAppPressure.DBConnect
             }
         }
 
-        private void DBConnectors( )
-        {
-            try
-            {
+        //private void DBConnectors( )
+        //{
+        //    try
+        //    {
                
-                databaseConnection = new MySqlConnection(MySQLConnect);
+        //        databaseConnection = new MySqlConnection(MySQLConnect);
 
-                Console.WriteLine("Подключило к БД");
+        //        Console.WriteLine("Подключило к БД");
 
                 
-            }
-            catch
-            {
-                Console.WriteLine("Не подключило к БД");
+        //    }
+        //    catch
+        //    {
+        //        Console.WriteLine("Не подключило к БД");
 
                
-            }
+        //    }
             
-        }
+        //}
 
         public bool TokenCheck(string token)
         {
@@ -94,7 +94,7 @@ namespace WpfAppPressure.DBConnect
             }
         }
 
-        public void TokenCreate(int id_user, string tokeno)
+        private void TokenCreate(int id_user, string tokeno)
         {
 
             tokeno = ComputeSHA256Hash(tokeno.Substring(0, tokeno.IndexOf('@')));
@@ -156,6 +156,7 @@ namespace WpfAppPressure.DBConnect
 
         public bool BDCommandAuth(string email, string password )
         {
+            password = ComputeSHA256Hash(password);
 
             query = "SELECT id_account, email, password FROM accounts WHERE email='"+email+"' AND password='"+password+"' ";
 
@@ -179,7 +180,7 @@ namespace WpfAppPressure.DBConnect
                         Id_User = reader.GetInt32(0);
                     }
 
-                    databaseConnection.Close();
+                  //  databaseConnection.Close();
 
 
                     TokenCreate(Id_User, email);
@@ -191,7 +192,7 @@ namespace WpfAppPressure.DBConnect
                 else
                 {
                     Console.WriteLine("No rows found.");
-                    databaseConnection.Close();
+                    //databaseConnection.Close();
 
                     return false;
                 }
@@ -204,8 +205,35 @@ namespace WpfAppPressure.DBConnect
 
                 return false;
             }
+            finally
+            {
+                databaseConnection.Close();    
+            }
 
            
+        }
+
+        public void DBCommandRegister(string UserEmail, string UserPhone, string UserPassword, string UserSurname, string UserName, string MiddleName, DateTime UserBirthday, int Weight, int Height)
+        {
+
+            try
+            {
+                UserPassword = ComputeSHA256Hash(UserPassword);
+
+                query = "INSERT INTO accounts (id_account, email, password, phone_number, surname, name, middle_name ) VALUES (NULL, '" + UserEmail + "', '" + UserPassword + "' , '" + UserPhone + "', '" + UserSurname + "' );";
+
+                command = new MySqlCommand(query, databaseConnection);
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                databaseConnection.Ping();
+            }
+            
+
         }
 
         

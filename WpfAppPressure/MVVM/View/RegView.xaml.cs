@@ -181,17 +181,17 @@ namespace WpfAppPressure.MVVM.View
         private void LostDateFocus(object sender, RoutedEventArgs e)
         {
             
-            if(string.IsNullOrEmpty(DayTextBox.Text))
+            if(string.IsNullOrEmpty(DayTextBox.Text) && string.IsNullOrEmpty(MonthTextBox.Text) && string.IsNullOrEmpty(YearTextBox.Text))
             {
-                if (string.IsNullOrEmpty(MonthTextBox.Text))
-                {
-                    if (string.IsNullOrEmpty(YearTextBox.Text))
-                    {
-                        AgeUser.Background = (Brush)AgeUser.FindResource("CueBannerBrushAgeUser");
-                        Razdel1.Visibility = Visibility.Hidden;
-                        Razdel2.Visibility = Visibility.Hidden;
-                    }
-                }
+                //if (string.IsNullOrEmpty(MonthTextBox.Text))
+                //{
+                //    if (string.IsNullOrEmpty(YearTextBox.Text))
+                //    {
+                      AgeUser.Background = (Brush)AgeUser.FindResource("CueBannerBrushAgeUser");
+                       Razdel1.Visibility = Visibility.Hidden;
+                       Razdel2.Visibility = Visibility.Hidden;
+                //    }
+                //}
             }
             
         }
@@ -226,14 +226,18 @@ namespace WpfAppPressure.MVVM.View
 
         private void RegFunAddBD(object sender, RoutedEventArgs e)
         {
-            //ФИО пользователя
+            
+                //ФИО пользователя
             string UserSurname = Surname.Text;
             string UserName = NameUser.Text;
             string UserMiddleName = MiddleName.Text;
-            
-            
+
+
             //Дата рождения пользователя
-            DateTime UserDateBirthday = new DateTime( Convert.ToInt32(YearTextBox.Text), Convert.ToInt32(MonthTextBox.Text), Convert.ToInt32(DayTextBox.Text));
+           
+                DateTime UserDateBirthday = new DateTime(Convert.ToInt32(YearTextBox.Text), Convert.ToInt32(MonthTextBox.Text), Convert.ToInt32(DayTextBox.Text));
+            
+
 
             //Рост и вес пользователя
             int UserWeight = Convert.ToInt32(WeightUser.Text);
@@ -242,20 +246,24 @@ namespace WpfAppPressure.MVVM.View
 
             //Пол пользователя 
             int UserGender = 0;
-
-            int p;
-
-            int fgff;
-
-
+                        
             if ((bool)Gender.IsChecked)
             {
                 UserGender = 1;
             }
             
 
+            //Данные пользователя для авторизации ( эл.почта, телефон, пароль) 
 
-            Console.WriteLine("Фамилия:" + UserSurname + "   Имя:" + UserName + "   Отчество:" + UserMiddleName + "  Дата:" + UserDateBirthday );
+            string UserEmail = EmailUser.Text;
+            string UserPhone = PhoneUser.Text;
+
+            string UserPassword = PasswordUser.Text;
+
+
+            
+
+            // Console.WriteLine("Фамилия:" + UserSurname + "   Имя:" + UserName + "   Отчество:" + UserMiddleName + "  Дата:" + UserDateBirthday );
         }
     }
 }
