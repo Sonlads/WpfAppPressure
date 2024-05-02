@@ -14,7 +14,7 @@ namespace WpfAppPressure.DBConnect
     public class DBConnector
     {
         private string query = null;
-        static private string MySQLConnect = "datasource=127.0.0.1;port=3306;username=sonlads;password=SD33bn55_;database=pressure;";
+        static private string MySQLConnect = "server=127.0.0.1; uid=sonlads; pwd=SD33bn55_; database=pressure;";
         private MySqlConnection databaseConnection = new MySqlConnection(MySQLConnect);
         private MySqlDataReader reader = null;
         private MySqlCommand command = null;
@@ -138,7 +138,7 @@ namespace WpfAppPressure.DBConnect
                 // Execute the query
                 reader = command.ExecuteReader();
                 
-                databaseConnection.Close();
+               
 
                 Properties.Settings.Default.token = tokeno;
                 Properties.Settings.Default.Save();
@@ -150,6 +150,10 @@ namespace WpfAppPressure.DBConnect
                 Console.WriteLine("TokenCreate:  "+ex.Message);
 
                
+            }
+            finally
+            {
+                databaseConnection.Close();
             }
 
         }
@@ -216,13 +220,24 @@ namespace WpfAppPressure.DBConnect
         public void DBCommandRegister(string UserEmail, string UserPhone, string UserPassword, string UserSurname, string UserName, string MiddleName, DateTime UserBirthday, int Weight, int Height)
         {
 
+            UserPassword = ComputeSHA256Hash(UserPassword);
+
+            query = "INSERT INTO accounts (id_account, email, password, phone_number, surname, name, middle_name ) VALUES (NULL, '" + UserEmail + "', '" + UserPassword + "' , '" + UserPhone + "', '" + UserSurname + "' );";
+
+            command = new MySqlCommand(query, databaseConnection);
+
             try
             {
-                UserPassword = ComputeSHA256Hash(UserPassword);
+                // Open the database
+                databaseConnection.Open();
 
-                query = "INSERT INTO accounts (id_account, email, password, phone_number, surname, name, middle_name ) VALUES (NULL, '" + UserEmail + "', '" + UserPassword + "' , '" + UserPhone + "', '" + UserSurname + "' );";
+               
 
-                command = new MySqlCommand(query, databaseConnection);
+
+                // Execute the query
+                reader = command.ExecuteReader();
+
+
             }
             catch
             {
@@ -230,7 +245,7 @@ namespace WpfAppPressure.DBConnect
             }
             finally
             {
-                databaseConnection.Ping();
+                databaseConnection.Close();
             }
             
 
