@@ -48,6 +48,10 @@ namespace WpfAppPressure
         {
             if (e.ChangedButton == MouseButton.Left)
             {
+                AuthWindow authWindow = new AuthWindow();
+
+                authWindow.Show();
+
                 this.Close();
             }
         }

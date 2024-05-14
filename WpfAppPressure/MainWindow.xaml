@@ -23,7 +23,7 @@
 
 
 
-    <Border>
+    <Border >
 
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
@@ -31,17 +31,27 @@
                 <GradientStop Color="#5533ff" Offset="0.5"/>
             </LinearGradientBrush>
         </Border.Background>
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
+            <Grid.RowDefinitions >
                 <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-          
+            
+            <Grid Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#FF0043E6" Offset="0"/>
+                        <GradientStop Color="#FF0043E6" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+            </Grid>
+
             <Grid Name="Logo" Grid.Column="0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Image Source="Images/PressureLogoTextWhite.png"
@@ -55,6 +65,10 @@
                   MouseDown="ToolBar_MouseDown" 
                   Margin="0,0,95,0">
             </Grid>
+           
+
+           
+            
             <StackPanel Orientation="Horizontal"  
                             HorizontalAlignment="Right"
                             Grid.Column="1">

@@ -96,10 +96,9 @@ namespace WpfAppPressure.DBConnect
 
         private void TokenCreate(int id_user, string tokeno)
         {
+            Console.WriteLine("TokenCreate: вход в функцию " );
 
             tokeno = ComputeSHA256Hash(tokeno.Substring(0, tokeno.IndexOf('@')));
-
-            
 
             Random res = new Random();
 
@@ -123,9 +122,6 @@ namespace WpfAppPressure.DBConnect
 
             tokeno = ran.Insert(res.Next(ran.Length), tokeno);
 
-            
-
-
             query = "INSERT INTO tokens (id_token, id_account_fk, token_value) VALUES (NULL, '"+id_user+"', '"+tokeno+"');";
 
             command = new MySqlCommand(query, databaseConnection);
@@ -136,9 +132,7 @@ namespace WpfAppPressure.DBConnect
                 databaseConnection.Open();
 
                 // Execute the query
-                reader = command.ExecuteReader();
-                
-               
+                reader = command.ExecuteReader();                               
 
                 Properties.Settings.Default.token = tokeno;
                 Properties.Settings.Default.Save();
@@ -173,9 +167,7 @@ namespace WpfAppPressure.DBConnect
 
                 // Execute the query
                 reader = command.ExecuteReader();
-
                 
-
                 if (reader.HasRows)
                 {
                     int Id_User = -1;
@@ -184,12 +176,8 @@ namespace WpfAppPressure.DBConnect
                         Id_User = reader.GetInt32(0);
                     }
 
-                  //  databaseConnection.Close();
-
-
+                    databaseConnection.Close();
                     TokenCreate(Id_User, email);
-
-                    
 
                     return true;
                 }
@@ -213,16 +201,15 @@ namespace WpfAppPressure.DBConnect
             {
                 databaseConnection.Close();    
             }
-
            
         }
 
-        public void DBCommandRegister(string UserEmail, string UserPhone, string UserPassword, string UserSurname, string UserName, string MiddleName, DateTime UserBirthday, int Weight, int Height)
+        public bool DBCommandRegister(string UserEmail, string UserPhone, string UserPassword, string UserSurname, string UserName, string MiddleName, DateTime UserBirthday, int Weight, int Height, int Gender)
         {
 
             UserPassword = ComputeSHA256Hash(UserPassword);
 
-            query = "INSERT INTO accounts (id_account, email, password, phone_number, surname, name, middle_name ) VALUES (NULL, '" + UserEmail + "', '" + UserPassword + "' , '" + UserPhone + "', '" + UserSurname + "' );";
+            query = "INSERT INTO accounts (id_account, email, password, phone_number, surname, name, middle_name ) VALUES (NULL, '" + UserEmail + "', '" + UserPassword + "' , '" + UserPhone + "', '" + UserSurname + "', '" + UserName + "', '" + MiddleName + "' );";
 
             command = new MySqlCommand(query, databaseConnection);
 
@@ -231,27 +218,92 @@ namespace WpfAppPressure.DBConnect
                 // Open the database
                 databaseConnection.Open();
 
-               
-
-
                 // Execute the query
                 reader = command.ExecuteReader();
 
+                reader.Close();
+
+                query = "SELECT id_account FROM accounts WHERE  email = '" + UserEmail + "' ";
+                command = new MySqlCommand(query, databaseConnection);
+
+                reader = command.ExecuteReader();
+
+
+                if (reader.Read())
+                { 
+                    int id_account = reader.GetInt32(0);
+                    reader.Close();
+
+                    query = "INSERT INTO patients (id_patient, id_account_fk, age, weight, height, gender) VALUES (NULL, '"+id_account+"', '"+UserBirthday.ToString("yyyy-MM-dd")+"', '"+Weight+"', '"+Height+"', '"+Gender+"');";
+                    command = new MySqlCommand(query, databaseConnection);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+                    return true;
+                }
+                else
+                {
+                   
+
+                    return false;
+                }
+            
+
+              
+
+               // return true;
 
             }
-            catch
+            catch(Exception ex)
             {
-
+                Console.WriteLine("Reg:  " + ex.Message);
+                return false;
             }
             finally
             {
                 databaseConnection.Close();
             }
             
-
         }
 
-        
+        public int TokenInID( )
+        {
+            int Id_User = -1;
+            
+            string token = Properties.Settings.Default.token;
+
+            query = "SELECT tokens.id_account_fk FROM tokens WHERE  tokens.token_value = '" + token + "' ";
+            command = new MySqlCommand(query, databaseConnection);
+
+            try
+            {
+                // Open the database
+                databaseConnection.Open();
+
+                // Execute the query
+                reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Id_User = reader.GetInt32(0);
+                    reader.Close();
+                    Console.WriteLine(reader.GetString(0) +"   " + token);
+                }
+
+                
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine("TocenInID:  " + ex.Message);
+            }
+            finally
+            {
+                databaseConnection.Close();
+            }
+
+            return Id_User;
+        }
+
+       
 
     }
 }

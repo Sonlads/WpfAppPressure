@@ -27,7 +27,10 @@ namespace WpfAppPressure
             
         }
 
+        public void Exit_Account()
+        {
 
+        }
 
         public void Is_Checked( int pageNumber)
         {

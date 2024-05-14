@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfAppPressure.MVVM.ViewModel;
 using WpfAppPressure.DBConnect;
+using System.Windows.Media.Media3D;
 
 namespace WpfAppPressure.MVVM.View
 {
@@ -261,9 +262,31 @@ namespace WpfAppPressure.MVVM.View
             string UserPassword = PasswordUser.Text;
 
 
-            
+            bool reg = false;
 
+            if (UserSurname.Length > 0 && UserName.Length > 0 && UserMiddleName.Length > 0 && UserDateBirthday != null && UserWeight != 0 && UserHeight !=0 && UserEmail.Length > 0 && UserPhone.Length > 0 && UserPassword.Length >= 8) 
+            {
+                DBConnector DBConnect = new DBConnector();
+
+               reg = DBConnect.DBCommandRegister(UserEmail, UserPhone, UserPassword, UserSurname, UserName, UserMiddleName, UserDateBirthday, UserWeight, UserHeight, UserGender);
+
+               if (reg) 
+                {
+                    
+                    AuthWindow authWindow = new AuthWindow();
+
+                    authWindow.Show();
+
+                    Window namedWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "RegWindower");
+
+                    namedWindow.Close();
+                } 
+            }
+            
+            
             // Console.WriteLine("Фамилия:" + UserSurname + "   Имя:" + UserName + "   Отчество:" + UserMiddleName + "  Дата:" + UserDateBirthday );
+
+            
         }
     }
 }
