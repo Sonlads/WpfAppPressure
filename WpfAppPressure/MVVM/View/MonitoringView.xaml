@@ -4,15 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfAppPressure.MVVM.View"
+             xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
                       Background="White">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Source="/Images/GrusmailColor.png"  Width="250"/>
+            
+            <!--<Image Source="/Images/GrusmailColor.png"  Width="250"/>
             <TextBlock Text="К сожелени страничка пока не существует" FontSize="24" FontStyle="Italic" >
 
-            </TextBlock>
+            </TextBlock>-->
+
+            <oxy:PlotView x:Name="PlotView"
+                      Model="{Binding PlotModel}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"/>
+            
         </StackPanel>
     </Grid>
 </UserControl>

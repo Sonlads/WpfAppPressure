@@ -42,7 +42,7 @@
                     </Image>
 
                     <StackPanel>
-                        <TextBlock Text="Измерить среднее артериальное&#x0a;давление"
+                        <TextBlock Text="Измерить  артериальное&#x0a;давление"
                                    Foreground="White"
                                    FontSize="26"
                                    Margin="10,50,10,0"/>

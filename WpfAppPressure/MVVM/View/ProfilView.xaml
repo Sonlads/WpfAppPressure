@@ -7,10 +7,11 @@
              xmlns:local="clr-namespace:WpfAppPressure.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="880" d:DesignWidth="1080"
-             Background="White"
-             FontFamily="San Francisco">
+             Background="White">
 
     <UserControl.Resources>
+
+       
 
         <Style x:Key="CircularImageStyle" TargetType="Grid">
             <Setter Property="Width" Value="180"/>
@@ -117,8 +118,10 @@
         <StackPanel Grid.Row="0" Grid.Column="0"
                         Margin="10,10,10,10"
                         MaxWidth="500"
-                    x:Name="ProfileFIO">
-
+                   
+                    x:Name="ProfileFIO"
+                    >
+            
 
             <Label Content="Фамилия" />
             <TextBox x:Name="UserSurname"

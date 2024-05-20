@@ -82,9 +82,9 @@ namespace WpfAppPressure.MVVM.View
 
             
 
-            query = "SELECT accounts.surname, accounts.name, accounts.middle_name, accounts.phone_number, accounts.email, DATE_FORMAT(patients.age,'%d.%m.%Y') AS formatted_date, patients.weight, patients.height, patients.gender, accounts.id_account FROM accounts " +
+            query = "SELECT accounts.surname, accounts.name, accounts.middle_name, accounts.phone_number, accounts.email, DATE_FORMAT(patients.age,'%d.%m.%Y') AS formatted_date, patients.weight, patients.height, patients.gender FROM accounts " +
                 "JOIN patients ON accounts.id_account = patients.id_account_fk " +
-                "JOIN tokens ON accounts.id_account = tokens.id_account_fk ";
+                "WHERE accounts.id_account = '"+id_user+"'";
 
             command = new MySqlCommand(query, databaseConnection);
 
@@ -166,7 +166,7 @@ namespace WpfAppPressure.MVVM.View
                 // Отправка запроса
                 byte[] responseBytes = client.UploadValues(url, formData);
                 string response = System.Text.Encoding.UTF8.GetString(responseBytes);
-                MessageBox.Show(response);
+                
             }
            
         }
@@ -300,7 +300,7 @@ namespace WpfAppPressure.MVVM.View
                 ProfilView profileUserControl = new ProfilView();
 
                 profileUserControl.StackButtonSetting.Children.Clear(); 
-
+                profileUserControl.DaleteButton.Children.Clear();
                 printDialog.PrintTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);
 
                 // Создаем объект FixedDocument и добавляем в него страницу из UserControl
@@ -505,5 +505,7 @@ namespace WpfAppPressure.MVVM.View
             PrimRedacktInfo.Visibility = Visibility.Collapsed;
             UnPrimRedacktInfo.Visibility = Visibility.Collapsed;
         }
+
+       
     }
 }

@@ -303,6 +303,36 @@ namespace WpfAppPressure.DBConnect
             return Id_User;
         }
 
+        public void RezultIzmerDavlen( int CAD, int DAD, int CpAD)
+        {
+            int id_user = TokenInID();
+
+            string currentTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            query = "INSERT INTO records (id_record, id_account_fk, datetime, cpressvalue, dpressvalue, pressvalue ) VALUES (NULL, '" + id_user + "', '" + currentTime + "' , '" + CAD + "', '" + DAD + "', '" + CpAD + "' );";
+
+            command = new MySqlCommand(query, databaseConnection);
+
+            try
+            {
+                // Open the database
+                databaseConnection.Open();
+
+                // Execute the query
+                reader = command.ExecuteReader();
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                databaseConnection.Close();
+            }
+        }
+
        
 
     }

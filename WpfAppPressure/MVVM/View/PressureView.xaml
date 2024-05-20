@@ -2,17 +2,239 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:wpfAnimatedGif="http://wpfanimatedgif.codeplex.com"
              xmlns:local="clr-namespace:WpfAppPressure.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="850" d:DesignWidth="1050"
              Background="White">
-    <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+
+    <UserControl.Resources>
+        
+        
+        <Style x:Key="RoundButtonStyle" TargetType="{x:Type ButtonBase}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#0077ff" Offset="0"/>
+                        <GradientStop Color="#5533ff" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <Border Background="{TemplateBinding Background}"
+                         CornerRadius="3"
+                         Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#5b93ff"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter  Property="Background" Value="#5533ff"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+       
+
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+
+        </Style>
+        
+    </UserControl.Resources>
+
+
+    <Grid RenderOptions.EdgeMode="Aliased">
+        <!--<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="/Images/GrusmailColor.png"  Width="250"/>
-            <TextBlock Text="К сожелени страничка пока не существует" FontSize="24" FontStyle="Italic" >
+            <TextBlock Text="К сожелени страничка пока не доступна" FontSize="24" FontStyle="Italic" >
 
             </TextBlock>
+        </StackPanel>-->
+
+        <ScrollViewer x:Name="MyScrollViewer"
+                          VerticalScrollBarVisibility="Hidden" 
+                          HorizontalScrollBarVisibility="Auto" 
+                         >
+            <StackPanel>
+            <StackPanel Margin="10,10"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                   >
+
+                    <TextBlock Text="Измерение артериального давления" FontSize="20" FontWeight="Bold" />
+
+                    <Border HorizontalAlignment="Left"
+                                    BorderThickness="0"
+                                    CornerRadius="5"
+                                    Background="#FFFFFFC8"
+                                    Margin="20,30,20,0"
+                                    >
+
+                        <WrapPanel VerticalAlignment="Top">
+                            
+                            <Image Margin="15,15,0,0" Source="/Images/Icons/iconsVneman.png" Width="35"  VerticalAlignment="Top"/>
+
+                            <TextBlock  x:Name="InfoIzmerDavlen"
+                                        Margin="10,15,15,15" 
+                                        HorizontalAlignment="Left" 
+                                        FontSize="16" 
+                                        Width="580"
+                                        TextWrapping="Wrap"
+                                        Visibility="Visible">
+
+                                
+                                    Прежде чем начать:
+                                    <LineBreak />
+                                     - убедитесь что ваше устройство для измерения подключено
+                                        <LineBreak />
+                                     - не выходите со вкладки давления до завершения измерения
+                                
+
+                            </TextBlock>
+                        </WrapPanel>
+                    </Border>
+
+
+                    <WrapPanel x:Name="WrapIzmerDavlen" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,80,5,30"
+                               Visibility="Hidden">
+
+                        <Image  x:Name="GifImage" Width="40" Height="40" Margin="0,0,10,0"/>
+                        
+                        <TextBlock  x:Name="IzmerDavlen"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Stretch" 
+                                    Text="Идет измерение давления" 
+                                    FontSize="16" 
+                                    FontWeight="Bold" 
+                                   >
+
+
+                        </TextBlock>
+                    </WrapPanel>
+                    <Button 
+                    Width="300"
+                    Height="50"
+                    FontSize="16"
+                    Margin="0,50,5,30"
+                    Style="{StaticResource RoundButtonStyle}"
+                    Click="BeginIzmerDavlen"
+                    Content="Начать измерение"
+                    >
+                    
+
+                    </Button>
+
+
+
+
+
+            </StackPanel>
+
+           
+                
+                <StackPanel 
+                    x:Name="MyStackPanel"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Stretch">
+
+                    
+
+                    <WrapPanel MouseDown="DopInfoOpen"
+                       HorizontalAlignment="Left"
+                       x:Name="Wrap1">
+                        <Label >Нормы среднего артериального давления</Label>
+
+                        <Image x:Name="Image1" Margin="0,5,0,0" Source="/Images/Icons/iconsRight.png" Width="10" ></Image>
+                    </WrapPanel>
+
+                    <TextBlock x:Name="TextBlock1"
+                           TextWrapping="Wrap"
+                           FontSize="16"
+                           Visibility="Collapsed"
+                           Margin="15,0"
+                           Width="700">
+                Нормы среднего артериального давления могут немного варьироваться в зависимости от возраста, пола и других факторов. 
+                Обычно считается, что нормальное среднее артериальное давление составляет около 80–100 мм рт. ст.
+                    </TextBlock>
+
+
+                    <WrapPanel MouseDown="DopInfoOpen"
+                       Margin="0,20,0,0"
+                       HorizontalAlignment="Left"
+                       x:Name="Wrap2">
+                        <Label>Максимальное и минимальное диастолическое и систолическое давление</Label>
+
+                        <Image x:Name="Image2" Margin="0,5,0,0" Source="/Images/Icons/iconsRight.png" Width="10" ></Image>
+
+
+                    </WrapPanel >
+
+                    <TextBlock x:Name="TextBlock2"
+                           TextWrapping="Wrap"
+                           FontSize="16"
+                           Visibility="Collapsed"
+                           Margin="15,0"
+                           Width="700">
+                    Минимальное и максимальное давление могут также варьироваться,
+                    но обычно они составляют примерно &#10;60–90 мм рт. ст. для диастолического давления 
+                    и 100–130 мм рт. ст. для  систолического давления.
+                    </TextBlock>
+
+                    <WrapPanel MouseDown="DopInfoOpen"
+                               Margin="0,20,0,0"
+                               HorizontalAlignment="Left"
+                               x:Name="Wrap3">
+                        <Label>Как вычисляется среднее артериальное давление (САД)</Label>
+
+                        <Image x:Name="Image3" Margin="0,5,0,0" Source="/Images/Icons/iconsRight.png" Width="10" ></Image>
+
+
+                    </WrapPanel>
+
+                    <TextBlock x:Name="TextBlock3"
+                               TextWrapping="Wrap"
+                               FontSize="16"
+                               Visibility="Collapsed"
+                               Margin="15,0"
+                               Width="700"
+                               >
+                    Среднее артериальное давление (СрАД) можно вычислить с помощью формулы, 
+                    которая зависит от измеряемых параметров, таких как систолическое и диастолическое давление. 
+                    Общепринятая формула для вычисления среднего артериального давления (СрАД) следующая:
+                     <LineBreak /><LineBreak />
+                     САД = (2 × ДАД + САД)/3
+                     <LineBreak /><LineBreak />
+                     Где:
+                    <LineBreak /><LineBreak />
+                     ДАД - диастолическое артериальное давление
+                    <LineBreak />
+                     САД - систолическое артериальное давление
+                    </TextBlock>
+
+                </StackPanel>
+          
+            
         </StackPanel>
+        </ScrollViewer>
     </Grid>
+
 </UserControl>
