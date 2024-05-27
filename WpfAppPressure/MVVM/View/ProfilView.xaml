@@ -89,6 +89,25 @@
             </Setter>
         </Style>
 
+
+        <Style TargetType="{x:Type Border}"
+        x:Key="StackPanelShadow">
+
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black"
+                BlurRadius="15"
+                Opacity="0.5"
+                ShadowDepth="5"
+                Direction="320">
+
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+
+
+        </Style>
+
     </UserControl.Resources>
 
     <Grid x:Name="ContenierProfile">
@@ -105,18 +124,36 @@
             </Ellipse>-->
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="200" Width="Auto"/>
+            <ColumnDefinition MinWidth="220" Width="Auto"/>
+            
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions >
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="240"/>
+            
             <RowDefinition />
         </Grid.RowDefinitions>
 
+        <Border Background="White" 
+        CornerRadius="5"
+        Style="{StaticResource StackPanelShadow}"
+        Margin="10,10,10,10"
+        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                >
+        </Border>
+        
+        <Border Background="White" 
+ CornerRadius="5"
+ Style="{StaticResource StackPanelShadow}"
+ Margin="10,0,10,10"
+ Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+         >
+            </Border>
+
 
         <StackPanel Grid.Row="0" Grid.Column="0"
-                        Margin="10,10,10,10"
+                        Margin="15,10,10,10"
                         MaxWidth="500"
                    
                     x:Name="ProfileFIO"
@@ -160,12 +197,17 @@
 
 
         <Grid   Grid.Row="0" Grid.Column="1"
+                Margin="10,10"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                 
                     Style="{StaticResource CircularImageStyle}"
                     x:Name="Pole_Img_Prof">
 
             <Image
                     Style="{StaticResource Naved_prof_Img}"
-                    x:Name="UserImage"   
+                    x:Name="UserImage"
+                    
                     Source="..\..\Images\user_profile_default.jpg"
                     MouseDown="UploadImage_Click"/>
 
@@ -174,9 +216,9 @@
 
         </Grid>
 
-        <StackPanel Grid.Row="0" Grid.Column="1"
+        <StackPanel Grid.Row="0" Grid.Column="2"
                     HorizontalAlignment="Right"
-                    Margin="10,10,10,10"
+                    Margin="10,20,20,10"
                     x:Name="StackButtonSetting">
             <WrapPanel>
                 <Button Margin="0,0,5,0"
@@ -232,7 +274,7 @@
             <StackPanel x:Name="ProfileInfoUser">
                 <WrapPanel>
 
-                    <StackPanel Margin="10,10,50,10"
+                    <StackPanel Margin="20,10,50,10"
                         Width="Auto"
                         MaxWidth="600"
                         HorizontalAlignment="Left"
@@ -343,7 +385,7 @@
                 </WrapPanel>
                 <StackPanel HorizontalAlignment="Left" 
                         VerticalAlignment="Top"
-                        Margin="10,20"
+                        Margin="20,20"
                             >
 
                     <WrapPanel>
@@ -376,7 +418,9 @@
                          Content="Выйти из аккаунта"
                          Foreground="White"
                          Visibility="Visible"
-                         Click="Exit_Account">
+                         Click="Exit_Account"
+                         
+                         Margin="10,10,10,0">
                    
                     <Button.Style>
                         <Style TargetType="Button">

@@ -285,8 +285,10 @@ namespace WpfAppPressure.DBConnect
                 if (reader.Read())
                 {
                     Id_User = reader.GetInt32(0);
+                    
+                   
+
                     reader.Close();
-                    Console.WriteLine(reader.GetString(0) +"   " + token);
                 }
 
                 

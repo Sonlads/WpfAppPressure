@@ -53,6 +53,7 @@ namespace WpfAppPressure.MVVM.View
             LoadGif();
 
             WrapIzmerDavlen.Visibility = Visibility.Visible;
+            WrapIzmerDavlen.Margin = new Thickness(0, 50, 0, 20);
             IzmerDavlen.Text = "Идет измерение давления";
             IzmerDavlen.FontSize = 16;
 
@@ -63,7 +64,7 @@ namespace WpfAppPressure.MVVM.View
         private void StartTimer()
         {
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(0); // нужный интервал времени
+            _timer.Interval = TimeSpan.FromSeconds(2); // нужный интервал времени
             _timer.Tick += Timer_Tick;
             _timer.Start();
         }
@@ -73,8 +74,10 @@ namespace WpfAppPressure.MVVM.View
             _timer.Stop(); // Остановить таймер после первого срабатывания
             IzmerDavlenia();
             GifImage.Visibility = Visibility.Collapsed;
-
            
+
+
+
         }
         private void IzmerDavlenia()
         {
@@ -84,6 +87,7 @@ namespace WpfAppPressure.MVVM.View
 
             double CAD = 0;
             double DAD = 0;
+
 
 
             //query = "SELECT DATE_FORMAT(patients.age,'%Y.%m.%d') AS formatted_date,patients.gender, patients.weight, patients.height  FROM accounts " +
@@ -131,6 +135,9 @@ namespace WpfAppPressure.MVVM.View
             //{
             //    databaseConnection.Close();
             //}
+
+
+
             int urovnyatel = random.Next(0, 50);
 
             CAD = random.Next(70, 100) + urovnyatel;
@@ -140,7 +147,8 @@ namespace WpfAppPressure.MVVM.View
             double CpAD = (2.0 * DAD + CAD) / 3.0;
 
             IzmerDavlen.Text = " Результаты измерения:" + "\n\n Cистолическое артериальное давление - " + Convert.ToInt32(CAD) + "\n\n Диастолическое артериальное давление - " + Convert.ToInt32(DAD) + "\n\n Среднее артериальное давление - " + Convert.ToInt32(CpAD);
-            IzmerDavlen.FontSize = 20;
+            IzmerDavlen.FontSize = 16;
+            WrapIzmerDavlen.Margin = new Thickness(0, 20, 0, 10);
 
             connector.RezultIzmerDavlen( Convert.ToInt32(CAD), Convert.ToInt32(DAD), Convert.ToInt32(CpAD));
 
@@ -151,8 +159,10 @@ namespace WpfAppPressure.MVVM.View
             if (sender is WrapPanel wrap)
             {
                 string WrapName = wrap.Name;
+
                 TextBlock correspondingTextBlock = null;
                 Image correspondingImage = null;
+
                 BitmapImage imageDown = new BitmapImage(new Uri("/Images/Icons/iconDown.png", UriKind.Relative));
                 BitmapImage imageRight = new BitmapImage(new Uri("/Images/Icons/iconsRight.png", UriKind.Relative));
 
@@ -172,7 +182,6 @@ namespace WpfAppPressure.MVVM.View
                         correspondingTextBlock = TextBlock3;
                         correspondingImage = Image3;
                         break;
-
                 }
 
                 if (correspondingTextBlock != null)
@@ -182,8 +191,6 @@ namespace WpfAppPressure.MVVM.View
                         correspondingTextBlock.Visibility == Visibility.Visible
                         ? Visibility.Collapsed
                         : Visibility.Visible;
-
-
 
                 }
                 if (indicator)
@@ -196,19 +203,7 @@ namespace WpfAppPressure.MVVM.View
                     correspondingImage.Source = imageDown;
                     indicator = !indicator;
                 }
-
-
-
             }
-
-
-
-
-            //MyStackPanel.UpdateLayout();
-
-            //MyScrollViewer.UpdateLayout();
-
-            //MyScrollViewer.ScrollToEnd();
         }
 
         private void LoadGif()

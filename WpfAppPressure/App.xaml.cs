@@ -5,6 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using SkiaSharp;
 
 namespace WpfAppPressure
 {
@@ -13,5 +16,10 @@ namespace WpfAppPressure
     /// </summary>
     public partial class App : Application
     {
+        
+
+       
     }
+
+
 }

@@ -11,8 +11,8 @@
 
 
     <UserControl.Resources>
-        
-        
+
+
         <Style x:Key="RoundButtonStyle" TargetType="{x:Type ButtonBase}">
             <Setter Property="Background">
                 <Setter.Value>
@@ -48,49 +48,85 @@
         </Style>
 
 
-       
+
 
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontWeight" Value="Bold" />
 
         </Style>
-        
+
+
+        <Style TargetType="{x:Type Border}"
+        x:Key="StackPanelShadow">
+
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black"
+                BlurRadius="15"
+                Opacity="0.5"
+                ShadowDepth="5"
+                Direction="320">
+
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+
+
+        </Style>
+
     </UserControl.Resources>
 
 
-    <Grid RenderOptions.EdgeMode="Aliased">
+    <Grid >
         <!--<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="/Images/GrusmailColor.png"  Width="250"/>
             <TextBlock Text="К сожелени страничка пока не доступна" FontSize="24" FontStyle="Italic" >
 
             </TextBlock>
         </StackPanel>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <ScrollViewer x:Name="MyScrollViewer"
-                          VerticalScrollBarVisibility="Hidden" 
-                          HorizontalScrollBarVisibility="Auto" 
-                         >
-            <StackPanel>
-            <StackPanel Margin="10,10"
+
+
+
+
+        <!--<StackPanel Margin="10,10"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                   >
+                    VerticalAlignment="Top"
+                   >-->
+        <Border Background="White" 
+        CornerRadius="5"
+        Style="{StaticResource StackPanelShadow}"
+        Margin="10,10"
+        Grid.Row="1" >
+        </Border>
 
-                    <TextBlock Text="Измерение артериального давления" FontSize="20" FontWeight="Bold" />
+        <Border Background="White" 
+        CornerRadius="5"
+        Style="{StaticResource StackPanelShadow}"
+        Margin="10,10"
+        Grid.Row="0" >
+        </Border>
 
-                    <Border HorizontalAlignment="Left"
+        <StackPanel Margin="10,10" Grid.Row="0">
+            <TextBlock Margin="10,10" Text="Измерение артериального давления" FontSize="20" FontWeight="Bold" />
+
+            <Border HorizontalAlignment="Left"
                                     BorderThickness="0"
                                     CornerRadius="5"
                                     Background="#FFFFFFC8"
                                     Margin="20,30,20,0"
                                     >
 
-                        <WrapPanel VerticalAlignment="Top">
-                            
-                            <Image Margin="15,15,0,0" Source="/Images/Icons/iconsVneman.png" Width="35"  VerticalAlignment="Top"/>
+                <WrapPanel VerticalAlignment="Top">
 
-                            <TextBlock  x:Name="InfoIzmerDavlen"
+                    <Image Margin="15,15,0,0" Source="/Images/Icons/iconsVneman.png" Width="35"  VerticalAlignment="Top"/>
+
+                    <TextBlock  x:Name="InfoIzmerDavlen"
                                         Margin="10,15,15,15" 
                                         HorizontalAlignment="Left" 
                                         FontSize="16" 
@@ -104,59 +140,67 @@
                                      - убедитесь что ваше устройство для измерения подключено
                                         <LineBreak />
                                      - не выходите со вкладки давления до завершения измерения
-                                
-
-                            </TextBlock>
-                        </WrapPanel>
-                    </Border>
 
 
-                    <WrapPanel x:Name="WrapIzmerDavlen" 
-                               HorizontalAlignment="Center" 
-                               Margin="0,80,5,30"
+                    </TextBlock>
+                </WrapPanel>
+            </Border>
+
+
+            <WrapPanel x:Name="WrapIzmerDavlen" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,0"
                                Visibility="Hidden">
-
-                        <Image  x:Name="GifImage" Width="40" Height="40" Margin="0,0,10,0"/>
-                        
-                        <TextBlock  x:Name="IzmerDavlen"
+                
+                <Image  x:Name="GifImage" Width="40" Height="40"   />
+                <TextBlock  x:Name="IzmerDavlen"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Stretch" 
-                                    Text="Идет измерение давления" 
+                                    Text="  Идет измерение давления" 
                                     FontSize="16" 
-                                    FontWeight="Bold" 
-                                   >
+                                    FontWeight="Bold" />
 
+            </WrapPanel>
 
-                        </TextBlock>
-                    </WrapPanel>
-                    <Button 
+            <Button 
                     Width="300"
                     Height="50"
                     FontSize="16"
-                    Margin="0,50,5,30"
+                    Margin="0,30,5,30"
                     Style="{StaticResource RoundButtonStyle}"
                     Click="BeginIzmerDavlen"
                     Content="Начать измерение"
                     >
-                    
-
-                    </Button>
 
 
+            </Button>
+
+
+        </StackPanel>
 
 
 
-            </StackPanel>
 
-           
-                
-                <StackPanel 
+
+        <ScrollViewer x:Name="MyScrollViewer"
+                   VerticalScrollBarVisibility="Hidden" 
+                   HorizontalScrollBarVisibility="Auto" 
+                   Grid.Row="1" Grid.RowSpan="1"
+                      Background="Transparent"
+                      Margin="10,10">
+
+            <StackPanel 
                     x:Name="MyStackPanel"
-                    Margin="10,10"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Stretch">
-
                     
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="Transparent"
+                    Grid.Row="1">
+
+                <TextBlock Text="Информация об артериальном давлении" FontSize="18" FontWeight="Bold" Margin="10,10"/>
+
+                <StackPanel Margin="10,10"  MinHeight="360"  >
+
 
                     <WrapPanel MouseDown="DopInfoOpen"
                        HorizontalAlignment="Left"
@@ -173,7 +217,7 @@
                            Margin="15,0"
                            Width="700">
                 Нормы среднего артериального давления могут немного варьироваться в зависимости от возраста, пола и других факторов. 
-                Обычно считается, что нормальное среднее артериальное давление составляет около 80–100 мм рт. ст.
+                Обычно считается, что нормальное среднее артериальное давление составляет около 80–110 мм рт. ст.
                     </TextBlock>
 
 
@@ -231,10 +275,12 @@
                     </TextBlock>
 
                 </StackPanel>
-          
-            
-        </StackPanel>
+
+
+            </StackPanel>
         </ScrollViewer>
+        <!--</StackPanel>
+        </ScrollViewer>-->
     </Grid>
 
 </UserControl>
