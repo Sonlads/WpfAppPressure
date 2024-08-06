@@ -14,18 +14,31 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfAppPressure.MVVM.ViewModel;
+using WpfAppPressure.MVVM.View;
 
 namespace WpfAppPressure
 {
     /// <summary>
     /// Логика взаимодействия для RegWindow.xaml
     /// </summary>
-    public partial class RegWindow : Window
+    public partial class RecomendationWindow : Window
     {
-        public RegWindow()
+        public RecomendationWindow(int id_Patient,int oncuda)
+        {
+
+            InitializeComponent();
+
+            RecomendationView recomendationView = new RecomendationView(id_Patient, oncuda);
+
+            ConternRecom.Content = recomendationView;
+
+        }
+
+        public RecomendationWindow()
         {
             InitializeComponent();
         }
+
 
         private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -48,9 +61,7 @@ namespace WpfAppPressure
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                AuthWindow authWindow = new AuthWindow();
-
-                authWindow.Show();
+                
 
                 this.Close();
             }

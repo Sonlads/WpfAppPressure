@@ -1,5 +1,5 @@
-﻿<Window x:Class="WpfAppPressure.RegWindow"
-        x:Name="RegWindower"
+﻿<Window x:Class="WpfAppPressure.RecomendationWindow"
+        x:Name="RecomendationWindower"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:WpfAppPressure"
         xmlns:viewModel="clr-namespace:WpfAppPressure.MVVM.ViewModel"
         mc:Ignorable="d"
-        Height="650" Width="701"
+        Height="350" Width="401"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -15,7 +15,7 @@
         AllowsTransparency="True">
 
     <Window.DataContext>
-        <viewModel:SearchPatientViewModel/>
+        <viewModel:RecomendationViewModel/>
     </Window.DataContext>
 
 
@@ -25,10 +25,12 @@
     <Border>
 
         <Border.Background>
+
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                <GradientStop Color="#0077ff" Offset="0"/>
-                <GradientStop Color="#5533ff" Offset="0.5"/>
+                <GradientStop Color="#FF2EDC61" Offset="0"/>
+                <GradientStop Color="#FF22D66F" Offset="0.5"/>
             </LinearGradientBrush>
+
         </Border.Background>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -98,8 +100,8 @@
             <ContentControl Grid.Row="1" 
                     
                     Margin="2,0,2,2"
-                    Content="{Binding RegVM}"
-                    x:Name="ConternReg"/>
+                    Content="{Binding RecomendationVM}"
+                    x:Name="ConternRecom"/>
 
         </Grid>
 

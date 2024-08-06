@@ -33,20 +33,20 @@ namespace WpfAppPressure.MVVM.View
 
         private DBConnector DBconn {  get; set; }
 
-      private void RegWindowOpen(object sender, MouseButtonEventArgs e)
-        {
-            Console.WriteLine("регистрация йо");
+      //private void RegWindowOpen(object sender, MouseButtonEventArgs e)
+      //  {
+      //      Console.WriteLine("регистрация йо");
 
-            RegWindow regWindow = new RegWindow();
+      //      RegWindow regWindow = new RegWindow();
 
-            regWindow.Show();
+      //      regWindow.Show();
 
-            Window namedWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "AuthWindower");
+      //      Window namedWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "AuthWindower");
 
-            namedWindow.Close();
+      //      namedWindow.Close();
 
             
-        }
+      //  }
         private void ChangedEmail(Object sender, RoutedEventArgs args)
         {
             if (email.Text.Length == 0)

@@ -39,13 +39,16 @@
                 <view:SearchPatientView/>
             </DataTemplate>
 
-           
+            <DataTemplate DataType="{x:Type viewModel:RecomendationViewModel}" >
+                <view:RecomendationView/>
+            </DataTemplate>
 
-           
+            <DataTemplate DataType="{x:Type viewModel:ProfilePatientViewModel}" >
+                <view:ProfilePatientView/>
+            </DataTemplate>
 
 
-
-
+            
         </ResourceDictionary>
     </Application.Resources>
 

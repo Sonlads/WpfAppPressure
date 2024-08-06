@@ -28,7 +28,7 @@ namespace WpfAppPressure.MVVM.View
 
         private MainWindow window = (MainWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "MainWindower");
 
-        private void IzmerBorder_MouseDown(object sender, MouseButtonEventArgs e)
+        private void SearchMonitoring_MouseDown(object sender, MouseButtonEventArgs e)
         {
             window.Is_Checked(2);
         }

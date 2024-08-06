@@ -111,8 +111,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DBConnect\DBConnector.cs" />
-    <Compile Include="RegWindow.xaml.cs">
-      <DependentUpon>RegWindow.xaml</DependentUpon>
+    <Compile Include="MVVM\ViewModel\ProfilePatientViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\RecomendationViewModel.cs" />
+    <Compile Include="MVVM\View\ProfilePatientView.xaml.cs">
+      <DependentUpon>ProfilePatientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\RecomendationView.xaml.cs">
+      <DependentUpon>RecomendationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RecomendationWindow.xaml.cs">
+      <DependentUpon>RecomendationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Page Include="AuthWindow.xaml">
@@ -152,7 +160,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\ProfilePatientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\ProfilView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\RecomendationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,7 +176,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RegWindow.xaml">
+    <Page Include="RecomendationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

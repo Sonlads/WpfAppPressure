@@ -15,7 +15,7 @@ namespace WpfAppPressure.MVVM.ViewModel
         public RelayCommand MonitoringViewCommand { get; set; }
         public RelayCommand ProfilViewCommand { get; set; }
 
-        
+        private MainWindow window = (MainWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "MainWindower");
 
         public HomeViewModel HomeVM {get; set;}
 
@@ -39,7 +39,7 @@ namespace WpfAppPressure.MVVM.ViewModel
 
             
 
-            MainWindow window = (MainWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "MainWindower");
+            
 
             HomeViewCommand = new RelayCommand((o => 
             {

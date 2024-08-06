@@ -27,6 +27,7 @@ using LiveChartsCore.SkiaSharpView.WPF;
 using LiveChartsCore.SkiaSharpView.Painting.Effects;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.Measure;
+using System.ComponentModel.Design;
 
 
 
@@ -49,6 +50,9 @@ namespace WpfAppPressure.MVVM.View
         private MySqlDataReader reader = null;
         private MySqlCommand command = null;
         private DBConnector connector = new DBConnector();
+        private int Id_Patient = -1;
+
+        private int Otcuda = -1;
 
         List<string> customAxisLabels = new List<string>() { "5" };
 
@@ -59,6 +63,14 @@ namespace WpfAppPressure.MVVM.View
         List<int> MaxPressValue = new List<int> { 10};
         List<int> MinPressValue = new List<int> { 10};
         List<int> NormalPressValue = new List<int> { 10 };
+        public void MonitoringerView(int id ,int otcuda = 0)
+        {
+            Otcuda = otcuda;
+
+            Id_Patient = id;
+            Click_DaysDefoult();
+            
+        }
 
         public MonitoringView()
         {
@@ -72,7 +84,8 @@ namespace WpfAppPressure.MVVM.View
 
             // Настройка пользовательских подписей для оси X
 
-            Click_DaysDefoult();
+            
+           
 
             //Настройка подписей оси X
             //Labels = new[] { "Jan", "Feb", "Mar", "Apr" };
@@ -84,7 +97,11 @@ namespace WpfAppPressure.MVVM.View
             //};
 
         }
+        public void SearchPatientID()
+        {
 
+        }
+            
         //public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
 
@@ -454,17 +471,17 @@ namespace WpfAppPressure.MVVM.View
 
         private void Click_DaysDefoult()
         {
-            int id_user = connector.TokenInID();
+            //int id_user = connector.TokenInID();
 
             Days7.Opacity = 0.5;
             Days30.Opacity = 0.5;
             DaysAll.Opacity = 0.5;
             DaysToday.Opacity = 1;
 
-           
 
+           
             query = "SELECT DATE_FORMAT(datetime,'%d.%m.%Y %H:%i:%s' ) AS formatted_datetime, pressvalue, cpressvalue, dpressvalue  FROM records " +
-                    "WHERE id_account_fk = '" + id_user + "' AND datetime > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+                    "WHERE id_account_fk = '" + Id_Patient + "' AND datetime > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
             command = new MySqlCommand(query, databaseConnection);
 
@@ -535,7 +552,7 @@ namespace WpfAppPressure.MVVM.View
 
         private void Click_Days7(object sender, MouseButtonEventArgs e)
         {
-            int id_user = connector.TokenInID();
+            //int id_user = connector.TokenInID();
 
             Days7.Opacity = 1;
             Days30.Opacity = 0.5;
@@ -545,7 +562,7 @@ namespace WpfAppPressure.MVVM.View
            
 
             query = "SELECT DATE_FORMAT(datetime,'%d.%m.%Y %H:%i:%s' ) AS formatted_datetime, pressvalue, cpressvalue, dpressvalue  FROM records " +
-                    "WHERE id_account_fk = '" + id_user + "' AND datetime >= DATE_SUB(NOW(), INTERVAL 7 DAY)";
+                    "WHERE id_account_fk = '" + Id_Patient + "' AND datetime >= DATE_SUB(NOW(), INTERVAL 7 DAY)";
 
             command = new MySqlCommand(query, databaseConnection);
 
@@ -615,7 +632,7 @@ namespace WpfAppPressure.MVVM.View
         }
         private void Click_Days30(object sender, MouseButtonEventArgs e)
         {
-            int id_user = connector.TokenInID();
+            //int id_user = connector.TokenInID();
 
             Days7.Opacity = 0.5;
             Days30.Opacity = 1;
@@ -625,7 +642,7 @@ namespace WpfAppPressure.MVVM.View
             
 
             query = "SELECT DATE_FORMAT(datetime,'%d.%m.%Y %H:%i:%s' ) AS formatted_datetime, pressvalue, cpressvalue, dpressvalue  FROM records " +
-                    "WHERE id_account_fk = '" + id_user + "' AND datetime >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
+                    "WHERE id_account_fk = '" + Id_Patient + "' AND datetime >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
 
             command = new MySqlCommand(query, databaseConnection);
 
@@ -697,7 +714,7 @@ namespace WpfAppPressure.MVVM.View
 
             private void Click_DaysAll(object sender, MouseButtonEventArgs e)
         {
-            int id_user = connector.TokenInID();
+            //int id_user = connector.TokenInID();
 
             Days7.Opacity = 0.5;
             Days30.Opacity = 0.5;
@@ -708,7 +725,7 @@ namespace WpfAppPressure.MVVM.View
             
 
             query = "SELECT DATE_FORMAT(datetime,'%d.%m.%Y %H:%i:%s' ) AS formatted_datetime, pressvalue, cpressvalue, dpressvalue  FROM records " +
-                    "WHERE id_account_fk = '" + id_user + "'";
+                    "WHERE id_account_fk = '" + Id_Patient + "'";
 
             command = new MySqlCommand(query, databaseConnection);
 
@@ -779,7 +796,7 @@ namespace WpfAppPressure.MVVM.View
 
         private void Click_DaysToday(object sender, MouseButtonEventArgs e)
         {
-            int id_user = connector.TokenInID();
+            //int id_user = connector.TokenInID();
 
             Days7.Opacity = 0.5;
             Days30.Opacity = 0.5;
@@ -789,7 +806,7 @@ namespace WpfAppPressure.MVVM.View
            
 
             query = "SELECT DATE_FORMAT(datetime,'%d.%m.%Y %H:%i:%s' ) AS formatted_datetime, pressvalue, cpressvalue, dpressvalue  FROM records " +
-                    "WHERE id_account_fk = '" + id_user + "' AND datetime > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+                    "WHERE id_account_fk = '" + Id_Patient + "' AND datetime > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
             command = new MySqlCommand(query, databaseConnection);
 
@@ -856,6 +873,36 @@ namespace WpfAppPressure.MVVM.View
 
             CreateCharts(customAxisLabels, pressvalues);
             CreateDopInfo(customAxisLabels, pressvalues,cpressvalues,dpressvalues);
+        }
+        private MainWindow window = (MainWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "MainWindower");
+        private void Back_Search(object sender, RoutedEventArgs e)
+        {
+            int id_history = window.HistoryViewRemove();
+
+            if (id_history != 0)
+            {
+                
+                    window.Profil_Patient(Id_Patient);
+
+                
+               
+            }
+            else
+            {
+                window.Is_Checked(3);
+            }
+        }
+
+        private void Profile_View(object sender, RoutedEventArgs e)
+        {
+            window.Profil_Patient(Id_Patient);
+            window.HistoryViewAdd(1);
+        }
+
+        private void Recomendation_to_Patient(object sender, RoutedEventArgs e)
+        {
+            RecomendationWindow recomendationWindow =  new RecomendationWindow(Id_Patient,0);
+            recomendationWindow.Show();
         }
 
 

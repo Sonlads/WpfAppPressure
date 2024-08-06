@@ -82,8 +82,8 @@ namespace WpfAppPressure.MVVM.View
 
             
 
-            query = "SELECT accounts.surname, accounts.name, accounts.middle_name, accounts.phone_number, accounts.email, DATE_FORMAT(patients.age,'%d.%m.%Y') AS formatted_date, patients.weight, patients.height, patients.gender FROM accounts " +
-                "JOIN patients ON accounts.id_account = patients.id_account_fk " +
+            query = "SELECT accounts.surname, accounts.name, accounts.middle_name, accounts.phone_number, accounts.email,  doctors.special, doctors.experience, doctors.education FROM accounts " +
+                "JOIN doctors ON accounts.id_account = doctors.id_account_fk " +
                 "WHERE accounts.id_account = '"+id_user+"'";
 
             command = new MySqlCommand(query, databaseConnection);
@@ -103,14 +103,10 @@ namespace WpfAppPressure.MVVM.View
                      UserMid_Name.Text = reader.GetString(2);
                      UserPhone.Text = reader.GetString(3);
                      UserEmail.Text = reader.GetString(4);
-                     UserAge.Text = reader.GetString(5);
-                     UserWidth.Text = reader.GetString(6);
-                     UserHeight.Text = reader.GetString(7);
-                     
-                    if (reader.GetInt32(8) == 1)
-                        UserGender.Text = "Женский";
-                    else if (reader.GetInt32(8) == 0)
-                        UserGender.Text = "Мужчина";
+                     UserSpecial.Text = reader.GetString(5);
+                     UserExperience.Text = reader.GetString(6);
+                     UserEducation.Text = reader.GetString(7);
+                   
                    
                 }
 
@@ -350,21 +346,22 @@ namespace WpfAppPressure.MVVM.View
                 control.Width = 200;
             }
 
-            UserHeight.BorderThickness = new Thickness(1); // Установить новое значение BorderThickness
-            UserHeight.IsReadOnly = false;
-            UserHeight.Width = 50;
+            UserSpecial.BorderThickness = new Thickness(1); // Установить новое значение BorderThickness
+            UserSpecial.IsReadOnly = false;
+            UserSpecial.Width = 200;
 
-            UserWidth.BorderThickness = new Thickness(1); // Установить новое значение BorderThickness
-            UserWidth.IsReadOnly = false;
-            UserWidth.Width = 50;
+            UserExperience.BorderThickness = new Thickness(1); // Установить новое значение BorderThickness
+            UserExperience.IsReadOnly = false;
+            UserExperience.Width = 200;
 
-            UserAge.BorderThickness = new Thickness(1); // Установить новое значение BorderThickness
-            UserAge.IsReadOnly = false;
-            UserAge.Width = 100;
+            UserEducation.BorderThickness = new Thickness(1); // Установить новое значение BorderThickness
+            UserEducation.IsReadOnly = false;
+            UserEducation.Width = 450;
+            UserEducation.Height = 50;
 
 
-            UserGender.Visibility = Visibility.Collapsed;
-            UserGenderCB.Visibility = Visibility.Visible;
+            //UserGender.Visibility = Visibility.Collapsed;
+            //UserGenderCB.Visibility = Visibility.Visible;
 
             ExitAccountButton.Visibility = Visibility.Collapsed;
 
@@ -416,22 +413,22 @@ namespace WpfAppPressure.MVVM.View
                 control.Width = double.NaN;
             }
 
-            UserHeight.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
-            UserHeight.IsReadOnly = true;
-            UserHeight.Width = double.NaN;
+            UserSpecial.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
+            UserSpecial.IsReadOnly = true;
+            UserSpecial.Width = double.NaN;
 
-            UserWidth.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
-            UserWidth.IsReadOnly = true;
-            UserWidth.Width = double.NaN;
+            UserExperience.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
+            UserExperience.IsReadOnly = true;
+            UserExperience.Width = double.NaN;
 
-            UserAge.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
-            UserAge.IsReadOnly = true;
-            UserAge.Width = double.NaN;
+            UserEducation.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
+            UserEducation.IsReadOnly = true;
+            UserEducation.Width = 450;
 
-            UserGender.Text = ((ComboBoxItem)UserGenderCB.SelectedItem).Content.ToString();
+            //UserGender.Text = ((ComboBoxItem)UserGenderCB.SelectedItem).Content.ToString();
 
-            UserGender.Visibility = Visibility.Visible;
-            UserGenderCB.Visibility = Visibility.Collapsed;
+            //UserGender.Visibility = Visibility.Visible;
+            //UserGenderCB.Visibility = Visibility.Collapsed;
 
             ExitAccountButton.Visibility = Visibility.Visible;
 
@@ -439,17 +436,17 @@ namespace WpfAppPressure.MVVM.View
             UnPrimRedacktInfo.Visibility = Visibility.Collapsed;
 
 
-            string date = DateTime.ParseExact(UserAge.Text, "dd.MM.yyyy", null).ToString("yyyy-MM-dd");
+            //string date = DateTime.ParseExact(UserAge.Text, "dd.MM.yyyy", null).ToString("yyyy-MM-dd");
 
-            
 
-            
+
+
 
             int Id_user = connector.TokenInID();
 
             query = "UPDATE accounts" +
-                    " JOIN patients ON accounts.id_account = patients.id_account_fk " +
-                    " SET accounts.surname ='" + UserSurname.Text+ "', accounts.name='" + UserName.Text+ "', accounts.middle_name='" + UserMid_Name.Text+ "',  patients.age='" + date+ "', patients.weight='" + UserWidth.Text+ "', patients.height='" + UserHeight.Text+ "', patients.gender = '" + UserGenderCB.SelectedIndex.ToString() + "' " +
+                    " JOIN doctors ON accounts.id_account = doctors.id_account_fk " +
+                    " SET accounts.surname ='" + UserSurname.Text+ "', accounts.name='" + UserName.Text+ "', accounts.middle_name='" + UserMid_Name.Text+ "', doctors.special='" + UserSpecial.Text+ "', doctors.experience='" + UserExperience.Text+ "', doctors.education = '" + UserEducation.Text + "' " +
                     "WHERE accounts.id_account='" + connector.TokenInID() + "' ";
 
 
@@ -484,21 +481,21 @@ namespace WpfAppPressure.MVVM.View
                 control.Width = double.NaN;
             }
 
-            UserHeight.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
-            UserHeight.IsReadOnly = true;
-            UserHeight.Width = double.NaN;
+            UserSpecial.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
+            UserSpecial.IsReadOnly = true;
+            UserSpecial.Width = double.NaN;
 
-            UserWidth.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
-            UserWidth.IsReadOnly = true;
-            UserWidth.Width = double.NaN;
+            UserExperience.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
+            UserExperience.IsReadOnly = true;
+            UserExperience.Width = double.NaN;
 
-            UserAge.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
-            UserAge.IsReadOnly = true;
-            UserAge.Width = double.NaN;
+            UserEducation.BorderThickness = new Thickness(0); // Установить новое значение BorderThickness
+            UserEducation.IsReadOnly = true;
+            UserEducation.Width = 450;
 
-            UserGender.Visibility = Visibility.Visible;
-            UserGenderCB.Visibility = Visibility.Collapsed;
-            
+            //UserGender.Visibility = Visibility.Visible;
+            //UserGenderCB.Visibility = Visibility.Collapsed;
+
 
             ExitAccountButton.Visibility = Visibility.Visible;
 

@@ -59,8 +59,8 @@
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                        <GradientStop Color="#0077ff" Offset="0"/>
-                        <GradientStop Color="#5533ff" Offset="0.5"/>
+                        <GradientStop Color="#FF2EDC61" Offset="0"/>
+                        <GradientStop Color="#FF22D66F" Offset="0.5"/>
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
@@ -78,10 +78,10 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#5b93ff"/>
+                                <Setter Property="Background" Value="#FF25ED1F"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter  Property="Background" Value="#5533ff"/>
+                                <Setter  Property="Background" Value="#FF14BF16"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -144,10 +144,10 @@
         </Border>
         
         <Border Background="White" 
- CornerRadius="5"
- Style="{StaticResource StackPanelShadow}"
- Margin="10,0,10,10"
- Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                CornerRadius="5"
+                Style="{StaticResource StackPanelShadow}"
+                Margin="10,0,10,10"
+                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
          >
             </Border>
 
@@ -274,6 +274,8 @@
             <StackPanel x:Name="ProfileInfoUser">
                 <WrapPanel>
 
+                    
+                    
                     <StackPanel Margin="20,10,50,10"
                         Width="Auto"
                         MaxWidth="600"
@@ -286,10 +288,10 @@
 
                         <Rectangle  Height="1" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
-                        <Label Content="Дата рождения" FontSize="14"/>
+                        <Label Content="Специальность" FontSize="14"/>
 
 
-                        <TextBox x:Name="UserAge"
+                        <TextBox x:Name="UserSpecial"
                                  FontSize="16"
                                  Margin="10,0,0,10"
                                  BorderThickness="0"
@@ -297,18 +299,20 @@
                                  IsReadOnly="True">
                             отсутствует
                         </TextBox>
-                        <Label Content="Пол" FontSize="14"/>
+                        
+                        <Label Content="Опыт работы" FontSize="14"/>
 
 
-                        <TextBox x:Name="UserGender"
+                        <TextBox x:Name="UserExperience"
                                  FontSize="16"
                                  Margin="10,0,0,10"
                                  BorderThickness="0"
+                                 HorizontalAlignment="Left"
                                  IsReadOnly="True">
                             отсутствует
                         </TextBox>
 
-                        <ComboBox x:Name="UserGenderCB"
+                        <!--<ComboBox x:Name="UserGenderCB"
                                   FontSize="16"
                                   Margin="10,0,0,0"
                                   BorderThickness="0"
@@ -317,20 +321,23 @@
                                   SelectedIndex="0">
                             <ComboBoxItem>Мужской</ComboBoxItem>
                             <ComboBoxItem>Женский</ComboBoxItem>
-                        </ComboBox>
+                        </ComboBox>-->
 
-                        <Label Content="Вес" FontSize="14" />
+                        <Label Content="Образование" FontSize="14" />
                         
-                        <TextBlock  VerticalAlignment="Center">
-                        <TextBox x:Name="UserWidth"
+                        <!--<TextBlock  VerticalAlignment="Center">-->
+                        <TextBox x:Name="UserEducation"
                          FontSize="16"
                          Margin="10,0,0,5"
                          BorderThickness="0"
-                         IsReadOnly="True">
+                         HorizontalAlignment="Left"
+                         IsReadOnly="True"
+                                 TextWrapping="Wrap"
+                                 Width="450">
                             отсутствует
                             
                         </TextBox>
-                        <Label Content="кг" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <!--<Label Content="кг" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         </TextBlock>
 
                         <Label Content="Рост" FontSize="14"/>
@@ -344,7 +351,7 @@
                             отсутствует
                         </TextBox>
                         <Label Content="см" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                        </TextBlock>
+                        </TextBlock>-->
 
 
 
@@ -352,49 +359,51 @@
                     </StackPanel>
 
                     <StackPanel Margin="10,10,10,10"
-                        Width="Auto"
-                        MaxWidth="600"
-                        HorizontalAlignment="Left">
+                                Width="Auto"
+                                MaxWidth="600"
+                                HorizontalAlignment="Left">
 
                         <Label Content="Контактные данные" 
-                       FontSize="18" 
-                       FontWeight="Bold"/>
+                               FontSize="18" 
+                               FontWeight="Bold"/>
 
                         <Rectangle  Height="1" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
                         <Label Content="электронная почта" FontSize="14"/>
                         <TextBox x:Name="UserEmail"
-                         FontSize="16"
-                         Margin="10,0,0,10"
-                         BorderThickness="0"
-                         IsReadOnly="True">
+                                 FontSize="16"
+                                 Margin="10,0,0,10"
+                                BorderThickness="0"
+                                IsReadOnly="True">
                             отсутствует
                         </TextBox>
 
                         <Label Content="Номер телефона" FontSize="14"/>
 
                         <TextBox x:Name="UserPhone"
-                         FontSize="16"
-                         Margin="10,0,0,10"
-                         BorderThickness="0"
-                         IsReadOnly="True">
+                                FontSize="16"
+                                Margin="10,0,0,10"
+                                BorderThickness="0"
+                                IsReadOnly="True">
                             отсутствует
                         </TextBox>
 
                     </StackPanel>
+
+
                 </WrapPanel>
                 <StackPanel HorizontalAlignment="Left" 
-                        VerticalAlignment="Top"
-                        Margin="20,20"
+                            VerticalAlignment="Top"
+                            Margin="20,20"
                             >
 
                     <WrapPanel>
                         <Button Style="{StaticResource RoundButtonStyle}"
-                            x:Name="PrimRedacktInfo"
-                            Width="200" Height="30" 
-                            Content="Применить" 
-                            Visibility="Collapsed"
-                            Click="UdapteInfoProfile"/>
+                                x:Name="PrimRedacktInfo"
+                                Width="200" Height="30" 
+                                Content="Применить" 
+                                Visibility="Collapsed"
+                                Click="UdapteInfoProfile"/>
                         
                         <Button Style="{StaticResource RoundButtonStyle}"
                                 x:Name="UnPrimRedacktInfo"

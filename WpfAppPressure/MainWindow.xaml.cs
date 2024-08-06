@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfAppPressure.MVVM.View;
 using WpfAppPressure.MVVM.ViewModel;
 
 namespace WpfAppPressure
@@ -23,6 +24,8 @@ namespace WpfAppPressure
     {
         public MainWindow()
         {
+           
+
             InitializeComponent();
             
         }
@@ -31,6 +34,52 @@ namespace WpfAppPressure
         {
 
         }
+        private ProfilePatientView profilePatientView = new ProfilePatientView();
+        private MonitoringView monitoringView = new MonitoringView();
+
+        private List<int> HistoryView = new List<int>();
+        
+
+        public void HistoryViewAdd (int id)
+        {
+            HistoryView.Add(id);
+            Console.WriteLine("ADD: " + HistoryView.Count);
+        }
+        public int HistoryViewRemove()
+        {
+            if (HistoryView.Count > 0) { 
+            HistoryView.RemoveAt(HistoryView.Count-1);
+            }
+           
+            Console.WriteLine("Remove:"+HistoryView.Count); 
+
+            return HistoryView.Count;
+        }
+
+        
+
+        public void Profil_Patient(int id_patient)
+        {
+
+                 profilePatientView = new ProfilePatientView(id_patient);
+                 Contern.Content = profilePatientView;
+            
+                
+            
+        }
+        public void Monitor_Patient(int id_patient) 
+        {
+            
+            monitoringView = new MonitoringView();
+            monitoringView.MonitoringerView(id_patient);
+            Contern.Content = monitoringView;
+            
+               
+            
+
+        }
+
+       
 
         public void Is_Checked( int pageNumber)
         {
@@ -43,22 +92,24 @@ namespace WpfAppPressure
                 Console.WriteLine("переход в дом");     
                 
             }
-            else if (pageNumber == 2)
-            {
-                PageIzmer.IsChecked = true;
+            //else if (pageNumber == 2)
+            //{
+            //    PageIzmer.IsChecked = true;
 
-                Contern.Content = new PressureViewModel();
+            //    Contern.Content = new PressureViewModel();
 
-                Console.WriteLine("переход в давление");
+            //    Console.WriteLine("переход в давление");
         
-            }
+            //}
             else if (pageNumber == 3)
             {
                 PageMonitor.IsChecked = true;
 
-                Contern.Content = new MonitoringViewModel();
+                Contern.Content = new SearchPatientViewModel();
 
-                Console.WriteLine("переход в мониторинг");
+                HistoryView.Clear();
+
+                Console.WriteLine("переход в поиск пациента");
 
             }
             else if (pageNumber == 4)

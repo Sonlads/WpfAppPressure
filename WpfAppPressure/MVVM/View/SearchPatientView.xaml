@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="WpfAppPressure.MVVM.View.SearchPatientView"
+             x:Name="SearchPatientorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,27 +8,145 @@
              xmlns:viewModel="clr-namespace:WpfAppPressure.MVVM.ViewModel" 
              
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="701" Background="White">
+             d:DesignHeight="850" d:DesignWidth="1080" Background="White">
 
-    
+    <UserControl.Resources>
+        <Style x:Key="RoundButtonStyle" TargetType="{x:Type ButtonBase}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#FF2EDC61" Offset="0"/>
+                        <GradientStop Color="#FF22D66F" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <Border Background="{TemplateBinding Background}"
+                        CornerRadius="3"
+                        Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF23D05E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter  Property="Background" Value="#FF22D66F"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        
+        <Style TargetType="{x:Type Border}"
+                x:Key="StackPanelShadow">
+
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black"
+                                      BlurRadius="15"
+                                      Opacity="0.5"
+                                      ShadowDepth="5"
+                                      Direction="320">
+
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
 
     <StackPanel>
-        <Label FontSize="24" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center"
-               Margin="0,10,0,10">
-
-            Регистрация
-        </Label>
+        
         <Grid>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="350" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130" />
 
-           
+                <RowDefinition  Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Border Grid.Row="0"
+                    Background="White"
+                    Margin="10,5,10,10"
+                    CornerRadius="5"
+                    Style="{StaticResource StackPanelShadow}">
+                
+            </Border>
+            <!--<Border Grid.Row="1"
+                    Background="White"
+                    Margin="10,10,10,10"
+                    CornerRadius="5"
+                    Style="{StaticResource StackPanelShadow}">
+
+            </Border>-->
+
+            <StackPanel Grid.Row="0"
+                    Margin="10,10"
+                        >
+                <Label FontSize="20" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Left"
+                   Margin="0,10,0,0">
+
+                    Поиск пациентов
+                </Label>
+                <WrapPanel>
+                    <TextBox x:Name="SearcherPatientBox"
+                             Width="320"
+                             Margin="10,0,10,0"
+                             VerticalAlignment="Center"
+                             FontSize="14">
+                             
+                    </TextBox>
+                    <ComboBox Width="230"
+                              x:Name="SeacherCombo"
+                              Margin="10,0,10,0"
+                              Background="White"
+                              Foreground="Black"
+                              SelectedIndex="0"
+                              VerticalAlignment="Center">
+                        <ComboBoxItem >Поиск по индивидуальному номеру</ComboBoxItem>
+                        <ComboBoxItem >Поиск по ФИО</ComboBoxItem>
+                        <ComboBoxItem >Поиск по номеру телефона</ComboBoxItem>
+
+
+                    </ComboBox>
+                    <Button Style="{StaticResource RoundButtonStyle}"
+                             x:Name="ButtomSearchPatient"
+                     Width="100" Height="25"
+                     Margin="0,10,0,10"
+                     Content="Поиск"
+                     HorizontalAlignment="Left"
+                     Click="SearcherPatient_Click"/>
+                </WrapPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        >
+
+                <ScrollViewer  VerticalScrollBarVisibility="Hidden" 
+                               HorizontalScrollBarVisibility="Disabled" 
+                               Height="720" Margin="0,0,1,0"
+                               Padding="0">
+
+                    <WrapPanel x:Name="WrapInfoPatient" HorizontalAlignment="Left"
+                               >
+                        
+
+                    </WrapPanel>
+                </ScrollViewer>
+
+            </StackPanel>
+
+
         </Grid>
        
     </StackPanel>
