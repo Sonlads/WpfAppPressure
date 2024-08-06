@@ -19,11 +19,11 @@ using System.Windows.Media.Media3D;
 namespace WpfAppPressure.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для RegView.xaml
+    /// Логика взаимодействия для SearchPatientView.xaml
     /// </summary>
-    public partial class RegView : UserControl
+    public partial class SearchPatientView : UserControl
     {
-        public RegView()
+        public SearchPatientView()
         {
             InitializeComponent();
         }

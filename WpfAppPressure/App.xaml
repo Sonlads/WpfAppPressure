@@ -35,8 +35,8 @@
                 <view:AuthView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:RegViewModel}" >
-                <view:RegView/>
+            <DataTemplate DataType="{x:Type viewModel:SearchPatientViewModel}" >
+                <view:SearchPatientView/>
             </DataTemplate>
 
            

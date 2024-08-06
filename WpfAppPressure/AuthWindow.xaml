@@ -26,8 +26,8 @@
 
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                <GradientStop Color="#0077ff" Offset="0"/>
-                <GradientStop Color="#5533ff" Offset="0.5"/>
+                <GradientStop Color="#FF00E442" Offset="0"/>
+                <GradientStop Color="#FF2CDA76" Offset="0.5"/>
             </LinearGradientBrush>
         </Border.Background>
         <Grid>
@@ -39,6 +39,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
+            
 
             <Grid Name="Logo" Grid.Column="0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">

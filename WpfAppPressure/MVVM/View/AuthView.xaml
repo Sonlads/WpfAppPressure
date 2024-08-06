@@ -77,6 +77,7 @@
                     BorderThickness="0"
                     Foreground="White"
                     Name="AuthButton"
+                 Margin="0,40"
                  HorizontalContentAlignment="Center"
                  Click="AuthVerifyClick">
             
@@ -88,7 +89,7 @@
                 </Button.Resources>
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#0077ff"/>
+                    <Setter Property="Background" Value="#FF00E442"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
@@ -100,7 +101,7 @@
                     </Setter>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#5533ff"/>
+                            <Setter Property="Background" Value="#FF00C303"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -112,7 +113,7 @@
                 Авторизоваться
             </TextBlock>
         </Button>
-        <TextBlock HorizontalAlignment="Center"
+        <!--<TextBlock HorizontalAlignment="Center"
                    Margin="0,30,0,10"
                    FontWeight="bold"
                    FontSize="10">
@@ -133,7 +134,7 @@
          </Style>
             </TextBlock.Style>      
             ЗАРЕГИСТРИРОВАТЬСЯ
-        </TextBlock>
+        </TextBlock>-->
         
     </StackPanel>
 </UserControl>

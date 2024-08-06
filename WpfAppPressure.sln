@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppPressure", "WpfAppPressure\WpfAppPressure.csproj", "{ABF9CEE6-D41D-418A-8F8F-E68B2E1A0161}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppPressurePersonal", "WpfAppPressure\WpfAppPressurePersonal.csproj", "{ABF9CEE6-D41D-418A-8F8F-E68B2E1A0161}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

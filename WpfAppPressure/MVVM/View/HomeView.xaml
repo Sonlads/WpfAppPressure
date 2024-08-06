@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WpfAppPressure.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800" Background="White">
+             d:DesignHeight="880" d:DesignWidth="1080" Background="White">
     
     
 
@@ -14,47 +14,82 @@
 
         <Image Source="/Images/PressureLogoTextColor.png" 
                HorizontalAlignment="Left" 
+               
                Height="115" Width="249"
                Margin="0"/>
 
-        <StackPanel Orientation="Horizontal"
+        <StackPanel Orientation="Vertical"
                     Style="{StaticResource StackPanelShadow}">
-            
-            <Border Margin="60,0,0,60" 
-                    Width="620"
+            <StackPanel>
+                <Border Margin="60,0,0,60" 
+                    Width="600"
                     Height="180"
                     Style="{StaticResource BorderHomeTheme}"
-                    Name="IzmerBorder"
-                    MouseDown="IzmerBorder_MouseDown">
-                
-                <Border.Clip>
-                <RectangleGeometry RadiusX="10"
+                    Name="SearchMonitoringBorder"
+                    MouseDown="SearchMonitoring_MouseDown">
+
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="10"
                                        RadiusY="10"
                                        Rect="0,0,620,180"/>
-                </Border.Clip>
+                    </Border.Clip>
 
-                <Grid>
-                    <Image Width="200"
-                           Source="/Images/davl.png"
+                    <Grid>
+                        <Image Width="200"
+                           Source="/Images/MonitorGrafik.png"
                            HorizontalAlignment="Left" 
                            Margin="417,0,0,0" 
                            RenderTransformOrigin="0.5,0.5">
-                    </Image>
+                        </Image>
 
-                    <StackPanel>
-                        <TextBlock Text="Измерить  артериальное&#x0a;давление"
+                        <StackPanel>
+                            <TextBlock Text="Мониторинг артериального&#x0a;давление пациентов"
                                    Foreground="White"
                                    FontSize="26"
-                                   Margin="10,50,10,0"/>
-                    </StackPanel>
-                </Grid>
+                                   Margin="30,50,10,0"/>
+                        </StackPanel>
+                    </Grid>
 
-            </Border>
-                
+                </Border>
+            </StackPanel>
+            <StackPanel>
+                <Border Margin="60,0,0,60" 
+                         Width="620"
+                         Height="180"
+                         Style="{StaticResource BorderHomeTheme}"
+                         Name="MonitorPatientBorder"
+                         MouseDown="Border_MouseDown_1">
+
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="10"
+                           RadiusY="10"
+                           Rect="0,0,620,180"/>
+                    </Border.Clip>
+
+                    <Grid>
+                        <Image Width="200"
+                               Source="/Images/ProfSotrud.png"
+                               HorizontalAlignment="Left" 
+                               Margin="440,0,0,0" 
+                               RenderTransformOrigin="0.5,0.5">
+                        </Image>
+
+                        <StackPanel>
+                            <TextBlock Text="Перейти в свой&#x0a;профиль"
+                       Foreground="White"
+                       FontSize="26"
+                       Margin="30,50,10,0"/>
+                        </StackPanel>
+                    </Grid>
+
+                </Border>
+            </StackPanel>
+
+
         </StackPanel>
 
 
-        <StackPanel Orientation="Horizontal"
+        <!--<StackPanel Orientation="Horizontal"
                     Style="{StaticResource StackPanelShadow}">
             
             <Border Width="280" Height="120" 
@@ -70,7 +105,7 @@
                 <Grid>
                     <Image Source="/Images/graf.png" Margin="112,8,-37,12"/>
 
-                    <TextBlock Text="Мониторинг &#x0a;результатов" 
+                    <TextBlock Text="Мониторинг &#x0a;пациентов" 
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="22"
@@ -102,6 +137,6 @@
                 </Grid>
             </Border>
 
-        </StackPanel>
+        </StackPanel>-->
     </StackPanel>
 </UserControl>

@@ -27,8 +27,8 @@
 
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                <GradientStop Color="#0077ff" Offset="0"/>
-                <GradientStop Color="#5533ff" Offset="0.5"/>
+                <GradientStop Color="#FF00E442" Offset="0"/>
+                <GradientStop Color="#FF2CDA76" Offset="0.5"/>
             </LinearGradientBrush>
         </Border.Background>
         
@@ -46,8 +46,8 @@
             <Grid Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                        <GradientStop Color="#FF0043E6" Offset="0"/>
-                        <GradientStop Color="#FF0043E6" Offset="0.5"/>
+                        <GradientStop Color="#FF08D44D" Offset="0"/>
+                        <GradientStop Color="#FF25C704" Offset="0.5"/>
                     </LinearGradientBrush>
                 </Grid.Background>
             </Grid>
@@ -125,7 +125,7 @@
                              Command="{Binding HomeViewCommand}"
                              />
 
-                <RadioButton Content="Давление"
+                <!--<RadioButton Content="Давление"
                              x:Name="PageIzmer"
                              Height="50"
                              Foreground="White"
@@ -133,7 +133,7 @@
                              Style="{StaticResource MenuButtonTheme}" 
                              PreviewMouseDown="PageIzmer_MouseDown"
                              Command="{Binding PressureViewCommand}"
-                             />
+                             />-->
 
                 <RadioButton Content="Мониторинг"
                              x:Name="PageMonitor"

@@ -32,7 +32,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="RadioButton">
-                            <Border BorderThickness="15,0,0,0" BorderBrush="#0077ff">
+                            <Border BorderThickness="15,0,0,0" BorderBrush="#FF00E442">
                                 <Grid VerticalAlignment="Stretch"
                                   HorizontalAlignment="Stretch"
                                   Background="{TemplateBinding Background}">

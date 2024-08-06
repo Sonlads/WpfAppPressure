@@ -7,13 +7,13 @@ using WpfAppPressure.Core;
 
 namespace WpfAppPressure.MVVM.ViewModel
 {
-    class RegViewModel : ObservableObject
+    class SearchPatientViewModel : ObservableObject
 
     {
 
 
         private object _currentView;
-        public object RegVM
+        public object SearchPatientVM
         {
             get { return _currentView; }
             set
@@ -25,10 +25,10 @@ namespace WpfAppPressure.MVVM.ViewModel
         
             
 
-        public RegViewModel()
+        public SearchPatientViewModel()
         {
 
-            RegVM = this;
+            SearchPatientVM = this;
 
             // CurrentView = new Reg2ViewModel();
 
